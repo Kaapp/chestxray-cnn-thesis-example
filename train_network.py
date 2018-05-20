@@ -24,7 +24,11 @@ VALIDATION_SET_SIZE = 10000
 def augment_images(dataset):
     def random_flipping_wrapper(image, label):
         return data.random_flipping(image, label, network.is_training)
-
+	def random_scaling_and_crop_wrapper(image, label):
+		return data.random_scaling_and_crop(image, label, is_training)
+	
+	# Use some combination of augmentations and concat each one to the dataset
+	
     augmented = dataset.map(random_flipping_wrapper)
 
     return dataset.concatenate(augmented)
